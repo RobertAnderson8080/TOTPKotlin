@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toolbar
@@ -61,10 +62,13 @@ class HomeFragment : Fragment(), Observer<ArrayList<TotpEntry>>{
 
         val root: View = binding.root
 
-        val listView : ListView = root.findViewById(R.id.totp_list_view)
+        val listView : ListView = root.findViewById(R.id.totp_list_view);
 
         listViewAdapter = TotpEntryListAdapter(requireContext(), R.layout.totp_entry, homeViewModel.totpEntries.value!!)
         listView.adapter = listViewAdapter
+
+        listView.setOnItemClickListener(AdapterView.OnItemClickListener
+        { adapterView, view, i, l -> run { showDialogToEditEntry(i) } })
 
         homeViewModel.totpEntries.observe(viewLifecycleOwner, this)
 
@@ -87,5 +91,9 @@ class HomeFragment : Fragment(), Observer<ArrayList<TotpEntry>>{
 
     override fun onChanged(t: ArrayList<TotpEntry>?) {
         listViewAdapter?.notifyDataSetChanged();
+    }
+
+    private fun showDialogToEditEntry(position : Int) {
+
     }
 }
