@@ -72,7 +72,9 @@ class HomeFragment : Fragment(), Observer<ArrayList<TotpEntry>>{
 
         homeViewModel.totpEntries.observe(viewLifecycleOwner, this)
 
-        homeViewModel.addTOTPEntry(TotpEntry("whatever", "whatever"));
+        homeViewModel.addTOTPEntry(TotpEntry("entry 1", "entry 1"));
+        homeViewModel.addTOTPEntry(TotpEntry("entry 2", "entry 2"));
+        homeViewModel.addTOTPEntry(TotpEntry("entry 3", "entry 3"));
         listViewAdapter?.notifyDataSetChanged();
 
         return root
